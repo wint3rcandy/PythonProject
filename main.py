@@ -7,24 +7,40 @@ def addTasks(tasks):
         tasks.append(task)
 def viewTasks(tasks):
     print("Your task are:")
-    for task in tasks:
-        print(task)
+    for number, task in enumerate(tasks, start=1):
+        print(f"{number}. {task}")
+    print()
 
-tasks = []
+def deleteTasks(tasks):
+    print("Your task are:")
+    for number, task in enumerate(tasks, start=1):
+        print(f"{number}. {task}")
+    print()
+    num = int(input("What tasks would you like to delete?"))
+    deletedTask = tasks.pop(num - 1)
+    print(f"Deleted: {deletedTask}")
+    print()
 
-while True:
-    print("1. Add task")
-    print("2. View tasks")
-    print("3. Exit")
+def main():
+    tasks = []
 
-    choice = int(input("Choose an option: "))
+    while True:
+        print("1. Add task")
+        print("2. View tasks")
+        print("3. Delete task")
+        print("4. Exit")
 
-    if choice == 1:
-        addTasks(tasks)
+        choice = int(input("Choose an option: "))
 
-    elif choice == 2:
-        viewTasks(tasks)
+        if choice == 1:
+            addTasks(tasks)
 
-    elif choice == 3:
-        break
+        elif choice == 2:
+            viewTasks(tasks)
 
+        elif choice == 3:
+            deleteTasks(tasks)
+
+        elif choice == 4:
+            break
+main()
