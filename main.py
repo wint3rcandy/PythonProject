@@ -1,25 +1,53 @@
 def addTasks(tasks):
     while True:
-        task = input("Enter a task or type 'exit' to stop:")
+        task = input("Enter a task or type 'exit' to stop: ")
+
         if task.lower() == "exit":
             break
 
         tasks.append(task)
+
+
 def viewTasks(tasks):
-    print("Your task are:")
+    print("Your tasks are:")
+
     for number, task in enumerate(tasks, start=1):
         print(f"{number}. {task}")
+
     print()
 
+
 def deleteTasks(tasks):
-    print("Your task are:")
+    if not tasks:
+        print()
+        print("There are no tasks to delete.")
+        print()
+        return
+
+    print("Your tasks are:")
+
     for number, task in enumerate(tasks, start=1):
         print(f"{number}. {task}")
+
     print()
-    num = int(input("What tasks would you like to delete?"))
+
+    try:
+        num = int(input("What task would you like to delete? "))
+    except ValueError:
+        print("Please enter a number.")
+        print()
+        return
+
+    if num < 1 or num > len(tasks):
+        print("Please enter a valid task number.")
+        print()
+        return
+
     deletedTask = tasks.pop(num - 1)
+
     print(f"Deleted: {deletedTask}")
     print()
+
 
 def main():
     tasks = []
@@ -30,7 +58,13 @@ def main():
         print("3. Delete task")
         print("4. Exit")
 
-        choice = int(input("Choose an option: "))
+        try:
+            choice = int(input("Choose an option: "))
+        except ValueError:
+            print()
+            print("Please enter a valid number.")
+            print()
+            continue
 
         if choice == 1:
             addTasks(tasks)
@@ -43,4 +77,11 @@ def main():
 
         elif choice == 4:
             break
+
+        else:
+            print()
+            print("Please choose a valid option.")
+            print()
+
+
 main()
